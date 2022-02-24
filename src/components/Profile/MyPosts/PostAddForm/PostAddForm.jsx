@@ -1,6 +1,6 @@
 import React from "react";
 import paf from './PostAddForm.module.css'
-import {addPostActionCreator, updatePostTextActionCreator} from "../../../../redux/state";
+import {addPostActionCreator, updatePostTextActionCreator} from "../../../../redux/profileReducer";
 
 const PostAddForm = (props) => {
     /*let inputRef = React.createRef();*/
