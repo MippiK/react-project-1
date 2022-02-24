@@ -1,0 +1,14 @@
+.footer {
+  grid-area: f;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background-color: #0099ff;
+}
+.footer .content h2 {
+  color: #e6f2ff;
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=Footer.module.css.map */

@@ -1,0 +1,47 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+ul, ol, li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+
+.wrapper {
+    display: grid;
+    width: 1200px;
+    margin: 0 auto;
+    height: 100vh;
+    grid-template-areas:
+  'h h'
+  'n c'
+  'f f';
+
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: 3fr 10fr;
+    /*grid-gap: 10px;*/
+}
+
+.wrapper-content {
+    padding: 10px 10px;
+    grid-area: c;
+    background: #99ccff;
+}

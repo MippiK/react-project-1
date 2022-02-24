@@ -1,0 +1,28 @@
+.profile_upload_news {
+  margin-top: 10px;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  input[type='text'] {
+    padding: 0 5px;
+    width: 850px;
+    min-height: 50px;
+    background-color: #e6f1ff;
+    color: black;
+    vertical-align: top;
+    font-size: 14px;
+  }
+  button {
+    height: 50px;
+    width: 100px;
+    background-color: #4da9ff;
+    font-size: 14px;
+    color: #e6f2ff;
+    transition: 0.1s linear;
+    &:hover {
+      transition: 0.1s linear;
+      background-color: #338bff;
+    }
+  }
+}

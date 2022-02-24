@@ -1,0 +1,18 @@
+.message_wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #b3d7ff;
+  width: 400px;
+  min-height: 300px;
+  padding: 10px 10px;
+  .messages {
+    height: 40px;
+    p {
+      margin: 0;
+      padding: 0;
+      font-size: 18px;
+      color: #000a1a;
+    }
+  }
+}

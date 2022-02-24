@@ -1,0 +1,28 @@
+.nav {
+  padding: 10px 10px;
+  grid-area: n;
+  background: #4da9ff;
+  .nav_ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    li {
+      a {
+        font-size: 20px;
+        text-decoration: none;
+        color: #e6f2ff;
+        transition: 0.1s linear;
+        &:hover {
+          transition: 0.1s linear;
+          color: #b3d7ff;
+        }
+        &.active {
+          color: #b3d7ff;
+        }
+      }
+      &:last-child {
+        margin: 20px 0 0 0;
+      }
+    }
+  }
+}

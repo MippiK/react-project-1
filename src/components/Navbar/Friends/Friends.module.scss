@@ -1,0 +1,21 @@
+.nav_friends {
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+  .friend_item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+    }
+    .nav_friends_link {
+      color: #e6f2ff;
+      text-decoration: none;
+      font-size: 18px;
+    }
+  }
+}
+
