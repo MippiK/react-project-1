@@ -2,7 +2,6 @@ const ADD_MESSAGE = 'ADD-MESSAGE';
 const UPDATE_MESSAGE_TEXT = 'UPDATE-MESSAGE-TEXT'
 
 const dialogsReducer = (state, action) => {
-    debugger;
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {
@@ -23,7 +22,6 @@ const dialogsReducer = (state, action) => {
             return state;
     }
 }
-
 
 export const addMessageActionCreator = () => ({
     type: ADD_MESSAGE
