@@ -12,6 +12,7 @@ import Music from "./components/Music/Music";
 import Settings from "./components/Settings/Settings";
 
 const App = (props) => {
+    debugger
     return (
         <BrowserRouter>
             <div className='wrapper'>
