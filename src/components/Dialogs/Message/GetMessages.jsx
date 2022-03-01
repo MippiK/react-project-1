@@ -12,9 +12,9 @@ const GetMessages = (props) => {
             <div>
                 { messagesElements }
             </div>
-            <SendMessage dispatch={props.dispatch}
-                         newMessageText={props.newMessageText}
-            />
+            <SendMessage newMessageText={props.newMessageText}
+                         onAddMessage={props.onAddMessage}
+                         onUpdateMessageText={props.onUpdateMessageText} />
         </div>
 
     );

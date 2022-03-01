@@ -6,15 +6,14 @@ import GetMessages from "./Message/GetMessages";
 
 
 const Dialogs = (props) => {
-    debugger;
     return (
         <div className={d.dialogs_wrapper}>
-            <GetDialogs dialogs={props.data.dialogs}/>
+            <GetDialogs dialogs={props.dialogs}/>
 
-            <GetMessages messages={props.data.messages}
-                         dispatch={props.dispatch}
-                         newMessageText={props.data.newMessageText}
-            />
+            <GetMessages messages={props.messages}
+                         newMessageText={props.newMessageText}
+                         onAddMessage={props.onAddMessage}
+                         onUpdateMessageText={props.onUpdateMessageText} />
         </div>
     );
 }
