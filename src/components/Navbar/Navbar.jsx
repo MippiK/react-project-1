@@ -15,7 +15,7 @@ const Navbar = (props) => {
             <ul className={cn.nav_ul}>
                 {links}
             </ul>
-            <Friends friends={props.data.friends}/>
+            <Friends />
         </nav>
     );
 }
