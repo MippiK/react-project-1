@@ -1,13 +1,11 @@
-import React from "react";
-
 import MyPosts from "./MyPosts";
 import {addPostActionCreator, updatePostTextActionCreator} from "../../../redux/profileReducer";
 import {connect} from "react-redux";
 
 let mapStateToProps = (state) => {
     return {
-        newPostText: state.newPostText,
-        posts: state.posts
+        newPostText: state.profilePage.newPostText,
+        posts: state.profilePage.posts
     }
 };
 

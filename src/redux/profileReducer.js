@@ -10,6 +10,9 @@ let initialState = {
 };
 
 const profileReducer = (state = initialState, action) => {
+    // to work with data, first u need to copy it
+    let stateCopy = {...state}; // make shallow copy
+    stateCopy.posts = [...state.posts]; // copy messages
     switch (action.type) {
         case ADD_POST:
             let post = {
@@ -20,15 +23,15 @@ const profileReducer = (state = initialState, action) => {
             if (state.newPostText === '') {
                 alert('form empty');
             } else {
-                state.posts.push(post);
-                state.newPostText = '';
+                stateCopy.posts.push(post);
+                stateCopy.newPostText = '';
             }
-            return state;
+            return stateCopy; // then return copied data
         case UPDATE_POST_TEXT:
-            state.newPostText = action.text;
-            return state;
+            stateCopy.newPostText = action.text;
+            return stateCopy; // then return copied data
         default:
-            return state;
+            return stateCopy; // then return copied data
     }
 }
 

@@ -8,7 +8,7 @@ let initialState = {
         {id : 3, name: 'Nastya'},
         {id : 4, name: 'John'}
     ],
-        messages: [
+    messages: [
     {id : 1, message: 'Hello'},
     {id : 2, message: 'Hi'},
     {id : 3, message: 'Kak dela'},
@@ -18,6 +18,9 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
+    // to work with data, first u need to copy it
+    let stateCopy = {...state}; // make shallow copy
+    stateCopy.messages = [...state.messages]; // copy messages
     switch (action.type) {
         case ADD_MESSAGE:
             let message = {
@@ -27,15 +30,15 @@ const dialogsReducer = (state = initialState, action) => {
             if (state.newMessageText === '') {
                 alert('form empty');
             } else {
-                state.messages.push(message);
-                state.newMessageText = '';
+                stateCopy.messages.push(message);
+                stateCopy.newMessageText = '';
             }
-            return state;
+            return stateCopy; // then return copied data
         case UPDATE_MESSAGE_TEXT:
-            state.newMessageText = action.text;
-            return state;
+            stateCopy.newMessageText = action.text;
+            return stateCopy; // then return copied data
         default:
-            return state;
+            return stateCopy; // then return copied data
     }
 }
 
