@@ -6,7 +6,7 @@ import SendMessage from "./SendMessageForm/SendMessage";
 
 const GetMessages = (props) => {
 
-    let messagesElements = props.messages.map( m => <Message  message={m.message} /> );
+    let messagesElements = props.messages.map( m => <Message  message={m.message} key={m.id}/> );
     return (
         <div className={m.message_wrapper}>
             <div>

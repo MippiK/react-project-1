@@ -8,7 +8,7 @@ const Navbar = (props) => {
 
     let linkName = ['Profile', 'Messages', 'News', 'Music', 'Settings', 'Friends']
 
-    let links = linkName.map(el =><li><NavLink to={`/`+el} className = { navData => navData.isActive ? cn.active : cn.a }>{el}</NavLink></li>)
+    let links = linkName.map(el =><li><NavLink to={`/`+el} className = { navData => navData.isActive ? cn.active : cn.a } key={el.id}>{el}</NavLink></li>)
 
     return (
         <nav className={cn.nav}>

@@ -19,26 +19,21 @@ let initialState = {
 
 const dialogsReducer = (state = initialState, action) => {
     // to work with data, first u need to copy it
-    let stateCopy = {...state}; // make shallow copy
-    stateCopy.messages = [...state.messages]; // copy messages
     switch (action.type) {
         case ADD_MESSAGE:
-            let message = {
-                id: 5,
-                message: state.newMessageText
-            };
-            if (state.newMessageText === '') {
-                alert('form empty');
-            } else {
-                stateCopy.messages.push(message);
-                stateCopy.newMessageText = '';
+            let messageText = state.newMessageText;
+            return {
+                ...state,
+                messages: [...state.messages, {id:5, message: messageText}],
+                newMessageText: ''
             }
-            return stateCopy; // then return copied data
         case UPDATE_MESSAGE_TEXT:
-            stateCopy.newMessageText = action.text;
-            return stateCopy; // then return copied data
+            return {
+                ...state,
+                newMessageText: action.text
+            }
         default:
-            return stateCopy; // then return copied data
+            return state;
     }
 }
 
