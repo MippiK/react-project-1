@@ -1,0 +1,43 @@
+.friends {
+  .friends_element {
+    display: flex;
+    &:not(:last-child) {
+      margin-bottom: 15px;
+    }
+    .left_content {
+      display: flex;
+      flex-direction: column;
+      img {
+        width: 150px;
+        height: 150px;
+      }
+      button {
+        height: 20px;
+      }
+    }
+    .right_content {
+      background-color: #b3d7ff;
+      padding-left: 15px;
+      padding-right: 15px;
+      display: flex;
+      justify-content: space-between;
+      width: 300px;
+      .user_info {
+        width: 100px;
+        a {
+          text-decoration: none;
+          font-size: 20px;
+          color: #002766;
+        }
+        p {
+          font-size: 20px;
+        }
+      }
+      .user_country {
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
