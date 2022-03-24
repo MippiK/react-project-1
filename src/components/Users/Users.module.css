@@ -1,0 +1,41 @@
+.friends .friends_element {
+  display: flex;
+}
+.friends .friends_element:not(:last-child) {
+  margin-bottom: 15px;
+}
+.friends .friends_element .left_content {
+  display: flex;
+  flex-direction: column;
+}
+.friends .friends_element .left_content img {
+  width: 150px;
+  height: 150px;
+}
+.friends .friends_element .left_content button {
+  height: 20px;
+}
+.friends .friends_element .right_content {
+  background-color: #b3d7ff;
+  padding-left: 15px;
+  padding-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+}
+.friends .friends_element .right_content .user_info {
+  width: 100px;
+}
+.friends .friends_element .right_content .user_info a {
+  text-decoration: none;
+  font-size: 20px;
+  color: #002766;
+}
+.friends .friends_element .right_content .user_info p {
+  font-size: 20px;
+}
+.friends .friends_element .right_content .user_country p {
+  font-size: 20px;
+}
+
+/*# sourceMappingURL=Users.module.css.map */
