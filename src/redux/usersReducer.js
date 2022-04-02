@@ -13,7 +13,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, followed_by_user: !u.followed_by_user}
+                        return {...u, followed: !u.followed}
                     }
                     return u
                 })
@@ -21,7 +21,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return  {
                 ...state,
-                users: [...state.users, ...action.users]
+                users: [...action.users]
             }
         default:
             return state
