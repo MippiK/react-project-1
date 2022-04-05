@@ -2,16 +2,18 @@ import React from "react";
 import s from './Users.module.css'
 import axios from "axios";
 import profilePic from "../../assets/photos/default-profile-pic.jpg"
+import {NavLink} from "react-router-dom";
 
 class Users extends React.Component {
 
-    constructor(props) {
-        super(props);
-        axios
-            .get('https://social-network.samuraijs.com/api/1.0/users')
-            .then(response => {
-                props.setUsers(response.data.items);
-            })
+    componentDidMount() {
+        if (this.props.users.length === 0) {
+            axios
+                .get('https://social-network.samuraijs.com/api/1.0/users')
+                .then(response => {
+                    this.props.setUsers(response.data.items);
+                })
+        }
     }
 
     render() {
@@ -28,7 +30,7 @@ class Users extends React.Component {
 
                             <div className={s.right_content}>
                                 <div className={s.user_info}>
-                                    <a href={`/users/`+u.id}>{u.name}</a>
+                                    <NavLink to={`/users/`+u.name.toLowerCase()}>{u.name}</NavLink>
                                     <p>{u.status}</p>
                                 </div>
 
