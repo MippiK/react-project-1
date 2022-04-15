@@ -38,4 +38,14 @@
   font-size: 20px;
 }
 
+.currentPage {
+  color: aquamarine;
+}
+
+.page {
+  color: black;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
 /*# sourceMappingURL=Users.module.css.map */
