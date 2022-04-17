@@ -6,23 +6,11 @@ import {NavLink} from "react-router-dom";
 const Users = (props) => {
 
     let pages_count = Math.ceil(props.totalUsers / props.pageSize);
-    let pages = [];
-    for (let i = Math.max(props.currentPage - 5, 1); i <= Math.max(1, Math.min(props.currentPage + 5, pages_count)); i++) {
-        pages.push(i);
-    }
     return (
         <div className={s.friends}>
-            <div className="pagination">
-                {pages.map(page => {
-                    return <span className={props.currentPage === page ? s.currentPage : s.page} onClick={() => {
-                        props.setCurrentPage(page)
-                    }}>{page}</span>
-                })}
-            </div>
-
             {props.users.map(u => {
                 return (
-                    <div key={u.id} className={s.friends_element}>
+                    <div key={u.id} className={s.friends_element} onPointerEnter={ u.id === props.lastUserId ? () => {if(props.currentPage <= pages_count) {props.setCurrentPage(props.currentPage+1)}} : null}>
                         <div className={s.left_content}>
                             <img src={u.photos.small != null ? u.photos.small : profilePic} alt="user_picture"/>
                             <button

@@ -3,9 +3,11 @@ const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
+const SET_LAST_USER_ID = 'SET_LAST_USER_ID'
 
 let initialState = {
     users: [],
+    lastUserId: 0,
     currentPage: 1,
     pageSize: 10,
     totalUsers: 0,
@@ -27,7 +29,7 @@ const usersReducer = (state = initialState, action) => {
         case SET_USERS:
             return  {
                 ...state,
-                users: action.users
+                users: [...state.users, ...action.users]
             }
         case SET_CURRENT_PAGE:
             return {
@@ -43,6 +45,11 @@ const usersReducer = (state = initialState, action) => {
             return {
                 ...state,
                 isFetching: action.isFetching
+            }
+        case SET_LAST_USER_ID:
+            return {
+                ...state,
+                lastUserId: action.lastUserId
             }
         default:
             return state
@@ -64,6 +71,10 @@ export const setCurrentPageAC = (page) => ({
 export const setTotalUsersAC = (totalUsers) => ({
     type: SET_TOTAL_USERS,
     totalUsers
+});
+export const setLastUserIdAC = (lastUserId) => ({
+    type: SET_LAST_USER_ID,
+    lastUserId
 });
 export const toggleFetchingAC = (isFetching) => ({
     type: TOGGLE_FETCHING,

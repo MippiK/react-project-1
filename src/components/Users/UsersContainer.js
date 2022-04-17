@@ -1,7 +1,7 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    setCurrentPageAC,
+    setCurrentPageAC, setLastUserIdAC,
     setTotalUsersAC,
     setUsersAC,
     toggleFetchingAC,
@@ -22,7 +22,15 @@ class UsersContainer extends React.Component {
                     this.props.setUsers(response.data.items);
                     this.props.setTotalUsers(response.data.totalCount);
                     this.props.toggleFetching(false);
+                    this.setLastUser(response.data.items);
                 });
+        }
+    }
+
+    setLastUser = (users) => {
+        if (this.props.users.length !== 0) {
+            let last_user_id = users.slice(-1)
+            this.props.setLastUserId(last_user_id[0].id)
         }
     }
 
@@ -34,18 +42,21 @@ class UsersContainer extends React.Component {
             .then(response => {
                 this.props.setUsers(response.data.items);
                 this.props.toggleFetching(false);
+                this.setLastUser(response.data.items)
             });
     }
 
     render() {
         return <div className="users">
-            {this.props.isFetching ? <Preloader/> :
-                <Users totalUsers={this.props.totalUsers}
-                       pageSize={this.props.pageSize}
-                       currentPage={this.props.currentPage}
-                       setCurrentPage={this.setCurrentPage}
-                       users={this.props.users}
-                       toggleFollow={this.props.toggleFollow}/>}
+            <Users totalUsers={this.props.totalUsers}
+                   pageSize={this.props.pageSize}
+                   currentPage={this.props.currentPage}
+                   setCurrentPage={this.setCurrentPage}
+                   setLastUser={this.setLastUser}
+                   lastUserId={this.props.lastUserId}
+                   users={this.props.users}
+                   toggleFollow={this.props.toggleFollow}/>
+            {this.props.isFetching ? <Preloader/> : null}
         </div>
     }
 }
@@ -55,7 +66,8 @@ let mapStateToProps = (state) => {
         currentPage: state.usersPage.currentPage,
         pageSize: state.usersPage.pageSize,
         totalUsers: state.usersPage.totalUsers,
-        isFetching: state.usersPage.isFetching
+        isFetching: state.usersPage.isFetching,
+        lastUserId: state.usersPage.lastUserId
     }
 }
 let mapDispatchToProps = (dispatch) => {
@@ -74,6 +86,9 @@ let mapDispatchToProps = (dispatch) => {
         },
         toggleFetching: (ifFetching) => {
             dispatch(toggleFetchingAC(ifFetching))
+        },
+        setLastUserId: (lastUserId) => {
+            dispatch(setLastUserIdAC(lastUserId))
         }
     }
 }
