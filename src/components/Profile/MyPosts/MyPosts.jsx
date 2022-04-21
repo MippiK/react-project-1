@@ -6,8 +6,8 @@ const MyPosts = (props) => {
 
     return (
         <div>
-            <PostAddForm onAddPost={props.onAddPost}
-                         onChangeText={props.onChangeText}
+            <PostAddForm addPost={props.addPost}
+                         updatePostText={props.updatePostText}
                          newPostText={props.newPostText}
             />
 

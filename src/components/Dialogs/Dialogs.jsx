@@ -4,7 +4,6 @@ import d from './Dialogs.module.css';
 import GetDialogs from "./DialogItem/GetDialogs";
 import GetMessages from "./Message/GetMessages";
 
-
 const Dialogs = (props) => {
     return (
         <div className={d.dialogs_wrapper}>
@@ -12,8 +11,8 @@ const Dialogs = (props) => {
 
             <GetMessages messages={props.messages}
                          newMessageText={props.newMessageText}
-                         onAddMessage={props.onAddMessage}
-                         onUpdateMessageText={props.onUpdateMessageText} />
+                         addMessage={props.addMessage}
+                         updateMessageText={props.updateMessageText} />
         </div>
     );
 }
