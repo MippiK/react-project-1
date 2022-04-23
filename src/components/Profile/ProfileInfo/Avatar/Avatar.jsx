@@ -1,9 +1,10 @@
 import React from "react";
 import a from './Avatar.module.css'
+import profile_photo from '../../../../assets/photos/default-profile-pic.jpg'
 
-const Avatar = () => {
+const Avatar = (props) => {
     return (
-        <img className={a.profile_avatar} src='https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fcache.lovethispic.com%2Fuploaded_images%2F350925-Art-Parrot-Image.jpg&f=1&nofb=1' alt='profile_avatar'/>
+        <img className={a.profile_avatar} src={props.photo != null? props.photo : profile_photo} alt='profile_photo'/>
     );
 }
 

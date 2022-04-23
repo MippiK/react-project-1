@@ -19,7 +19,7 @@ const Users = (props) => {
 
                         <div className={s.right_content}>
                             <div className={s.user_info}>
-                                <NavLink to={`/users/` + u.name.toLowerCase()}>{u.name}</NavLink>
+                                <NavLink to={`/profile/` + u.id}>{u.name}</NavLink>
                                 <p>{u.status}</p>
                             </div>
 
