@@ -1,9 +1,23 @@
 .header {
   grid-area: h;
   background: #0099ff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
 }
 .header img {
   width: 60px;
+  border-radius: 50%;
+}
+.header .header_link {
+  text-decoration: none;
+  font-size: 18px;
+  color: #e6f2ff;
+}
+.header .user_info img {
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
 }
 
