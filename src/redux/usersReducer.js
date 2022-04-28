@@ -21,7 +21,7 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.map(u => {
                     if (u.id === action.userId) {
-                        return {...u, followed: !u.followed}
+                        return {...u, followed: action.isFollowed}
                     }
                     return u
                 })
@@ -56,9 +56,10 @@ const usersReducer = (state = initialState, action) => {
     }
 }
 
-export const toggleFollow = (userId) => ({
+export const toggleFollow = (userId, isFollowed) => ({
     type: TOGGLE_FOLLOW,
-    userId
+    userId,
+    isFollowed
 });
 export const setUsers = (users) => ({
     type: SET_USERS,

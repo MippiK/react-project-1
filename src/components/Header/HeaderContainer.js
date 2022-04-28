@@ -3,8 +3,6 @@ import {connect} from "react-redux";
 import Header from "./Header";
 import {setAuthUser, toggleFetching} from "../../redux/authReducer";
 import axios from "axios";
-import Preloader from "../assets/Preloader/Preloader";
-import {setProfile} from "../../redux/profileReducer";
 
 class HeaderContainer extends React.Component {
 
@@ -24,7 +22,7 @@ class HeaderContainer extends React.Component {
 
     render() {
         return (
-            <> {this.props.isFetching ? <Preloader /> : <Header {...this.props} />}</>
+            <Header {...this.props} />
 
         )
     }
@@ -38,4 +36,4 @@ let mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {setAuthUser, toggleFetching, setProfile})(HeaderContainer);
+export default connect(mapStateToProps, {setAuthUser, toggleFetching})(HeaderContainer);
