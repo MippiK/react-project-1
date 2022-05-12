@@ -1,32 +1,56 @@
 import React from "react";
 import {connect} from "react-redux";
 import {
-    setCurrentPage, setLastUserId,
+    setCurrentPage,
+    setLastUserId,
     setTotalUsers,
     setUsers,
     toggleFetching,
     toggleFollow
 } from "../../redux/usersReducer";
-import axios from "axios";
 import Users from "./Users";
 import Preloader from "../assets/Preloader/Preloader";
+import {usersAPI} from "../../api/api";
 
 class UsersContainer extends React.Component {
 
     componentDidMount() {
         if (this.props.users.length === 0) {
             this.props.toggleFetching(true);
-            axios
-                .get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pageSize}`, {
-                    withCredentials: true
-                })
-                .then(response => {
-                    this.props.setUsers(response.data.items);
-                    this.props.setTotalUsers(response.data.totalCount);
+            usersAPI.getUsers(this.props.currentPage, this.props.pageSize)
+                .then(data => {
+                    this.props.setUsers(data.items);
+                    this.props.setTotalUsers(data.totalCount);
                     this.props.toggleFetching(false);
-                    this.setLastUser(response.data.items);
+                    this.setLastUser(data.items);
                 });
         }
+    }
+    setCurrentPage = (page) => {
+        this.props.setCurrentPage(page);
+        this.props.toggleFetching(true);
+        usersAPI.getUsers(page, this.props.pageSize)
+            .then(data => {
+                this.props.setUsers(data.items);
+                this.setLastUser(data.items)
+                this.props.toggleFetching(false);
+            });
+    }
+    follow = (userId) => {
+        usersAPI.follow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    this.props.toggleFollow(userId, true)
+                }
+            })
+    }
+    unfollow = (userId) => {
+        usersAPI.unfollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    this.props.toggleFollow(userId, false)
+                }
+            })
     }
 
     setLastUser = (users) => {
@@ -34,43 +58,6 @@ class UsersContainer extends React.Component {
             let last_user_id = users.slice(-1)
             this.props.setLastUserId(last_user_id[0].id)
         }
-    }
-    setCurrentPage = (page) => {
-        this.props.setCurrentPage(page);
-        this.props.toggleFetching(true);
-        axios
-            .get(`https://social-network.samuraijs.com/api/1.0/users?page=${page}&count=${this.props.pageSize}`, {
-                withCredentials: true
-            })
-            .then(response => {
-                this.props.setUsers(response.data.items);
-                this.props.toggleFetching(false);
-                this.setLastUser(response.data.items)
-            });
-    }
-    follow = (userId) => {
-        axios
-            .post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {}, {
-                withCredentials: true,
-                headers: {'API-KEY': '9dfd3506-108b-4ab7-91ff-9b822511480a'}
-            })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.toggleFollow(userId, true)
-                }
-            })
-    }
-    unfollow = (userId) => {
-        axios
-            .delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`, {
-                withCredentials: true,
-                headers: {'API-KEY': '9dfd3506-108b-4ab7-91ff-9b822511480a'}
-            })
-            .then(response => {
-                if (response.data.resultCode === 0) {
-                    this.props.toggleFollow(userId, false)
-                }
-            })
     }
 
     render() {
