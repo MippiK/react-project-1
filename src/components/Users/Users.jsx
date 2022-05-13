@@ -15,9 +15,9 @@ const Users = (props) => {
             } : null}>
                 <div className={s.left_content}>
                     <img src={u.photos.small != null ? u.photos.small : profilePic} alt="user_picture"/>
-                    {u.followed ? <button
+                    {u.followed ? <button disabled={props.isFollowPending.some(userId => userId === u.id)}
                             onClick={() => (props.unfollow(u.id, false))}>Unfollow</button> :
-                        <button
+                        <button disabled={props.isFollowPending.some(userId => userId === u.id)}
                             onClick={() => (props.follow(u.id, true))}>Follow</button>}
                 </div>
 

@@ -2,6 +2,7 @@ import React from "react";
 import {connect} from "react-redux";
 import {
     setCurrentPage,
+    setIsFollowPending,
     setLastUserId,
     setTotalUsers,
     setUsers,
@@ -37,19 +38,23 @@ class UsersContainer extends React.Component {
             });
     }
     follow = (userId) => {
+        this.props.setIsFollowPending(true, userId)
         usersAPI.follow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     this.props.toggleFollow(userId, true)
                 }
+                this.props.setIsFollowPending(false, userId)
             })
     }
     unfollow = (userId) => {
+        this.props.setIsFollowPending(true, userId)
         usersAPI.unfollow(userId)
             .then(data => {
                 if (data.resultCode === 0) {
                     this.props.toggleFollow(userId, false)
                 }
+                this.props.setIsFollowPending(false, userId)
             })
     }
 
@@ -70,6 +75,8 @@ class UsersContainer extends React.Component {
                    users={this.props.users}
                    follow={this.follow}
                    unfollow={this.unfollow}
+                   isFollowPending={this.props.isFollowPending}
+
             />
             {this.props.isFetching ? <Preloader/> : null}
         </div>
@@ -83,9 +90,10 @@ let mapStateToProps = (state) => {
         pageSize: state.usersPage.pageSize,
         totalUsers: state.usersPage.totalUsers,
         isFetching: state.usersPage.isFetching,
-        lastUserId: state.usersPage.lastUserId
+        lastUserId: state.usersPage.lastUserId,
+        isFollowPending: state.usersPage.isFollowPending
     }
 }
 
 export default connect(mapStateToProps,
-    {setUsers, setTotalUsers, setCurrentPage, setLastUserId, toggleFollow, toggleFetching})(UsersContainer);
+    {setUsers, setTotalUsers, setCurrentPage, setLastUserId, toggleFollow, toggleFetching, setIsFollowPending})(UsersContainer);

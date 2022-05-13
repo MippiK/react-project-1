@@ -4,6 +4,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
 const SET_TOTAL_USERS = 'SET_TOTAL_USERS'
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING'
 const SET_LAST_USER_ID = 'SET_LAST_USER_ID'
+const IS_FOLLOW_PENDING = 'IS_FOLLOW_PENDING'
 
 let initialState = {
     users: [],
@@ -11,7 +12,8 @@ let initialState = {
     currentPage: 1,
     pageSize: 10,
     totalUsers: 0,
-    isFetching: false
+    isFetching: false,
+    isFollowPending: [],
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -51,11 +53,21 @@ const usersReducer = (state = initialState, action) => {
                 ...state,
                 lastUserId: action.lastUserId
             }
+        case IS_FOLLOW_PENDING:
+            return  {
+                ...state,
+                isFollowPending: action.isPending ?
+                    [...state.isFollowPending, action.userId] :
+                    [state.isFollowPending.filter(userId => userId !== action.userId)]
+            }
         default:
             return state
     }
 }
 
+export const setIsFollowPending = (isPending, userId) => ({
+    type: IS_FOLLOW_PENDING, isPending, userId
+})
 export const toggleFollow = (userId, isFollowed) => ({
     type: TOGGLE_FOLLOW,
     userId,
