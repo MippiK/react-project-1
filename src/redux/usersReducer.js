@@ -1,3 +1,5 @@
+import {usersAPI} from "../api/api";
+
 const SET_USERS = 'SET_USERS';
 const TOGGLE_FOLLOW = 'TOGGLE_FOLLOW'
 const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE'
@@ -94,5 +96,56 @@ export const toggleFetching = (isFetching) => ({
     isFetching
 });
 
+export const setUsersTC = (currentPage, pageSize, setLastUser) => {
+    return (dispatch) => {
+        dispatch(toggleFetching(true));
+        usersAPI.getUsers(currentPage, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items));
+                dispatch(setTotalUsers(data.totalCount));
+                dispatch(toggleFetching(false));
+                setLastUser(data.items);
+            });
+    }
+}
+
+export const setCurrentPageTC = (page, pageSize, setLastUser) => {
+    return (dispatch) => {
+        dispatch(setCurrentPage(page));
+        dispatch(toggleFetching(true));
+        usersAPI.getUsers(page, pageSize)
+            .then(data => {
+                dispatch(setUsers(data.items));
+                setLastUser(data.items)
+                dispatch(toggleFetching(false));
+            });
+    }
+}
+
+export const followTC = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsFollowPending(true, userId));
+        usersAPI.follow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollow(userId, true));
+                }
+                dispatch(setIsFollowPending(false, userId))
+            })
+    }
+}
+
+export const unFollowTC = (userId) => {
+    return (dispatch) => {
+        dispatch(setIsFollowPending(true, userId));
+        usersAPI.unfollow(userId)
+            .then(data => {
+                if (data.resultCode === 0) {
+                    dispatch(toggleFollow(userId, false));
+                }
+                dispatch(setIsFollowPending(false, userId))
+            })
+    }
+}
 
 export default usersReducer;
