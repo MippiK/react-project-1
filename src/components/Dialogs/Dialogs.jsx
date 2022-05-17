@@ -5,6 +5,7 @@ import GetDialogs from "./DialogItem/GetDialogs";
 import GetMessages from "./Message/GetMessages";
 
 const Dialogs = (props) => {
+
     return (
         <div className={d.dialogs_wrapper}>
             <GetDialogs dialogs={props.dialogs}/>

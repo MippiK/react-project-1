@@ -3,6 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {setProfileTC} from "../../redux/profileReducer";
 import withRouter from "../assets/withRouter/withRouter";
+import withRedirect from "../assets/withRedirect/withRedirect";
 
 class ProfileContainer extends React.Component {
 
@@ -19,7 +20,7 @@ class ProfileContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => ({
-    profile: state.profilePage.profile
+    profile: state.profilePage.profile,
 })
 
-export default connect(mapStateToProps, {setProfileTC})(withRouter(ProfileContainer));
+export default connect(mapStateToProps, {setProfileTC})(withRouter(withRedirect(ProfileContainer)));
