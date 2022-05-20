@@ -2,6 +2,7 @@ import Dialogs from "./Dialogs";
 import {addMessage, updateMessageText} from "../../redux/dialogsReducer";
 import {connect} from "react-redux";
 import withRedirect from "../assets/withRedirect/withRedirect";
+import {compose} from "redux";
 
 let mapStateToProps = (state) => {
     return {
@@ -11,7 +12,5 @@ let mapStateToProps = (state) => {
     }
 };
 
-const DialogsContainer = connect(mapStateToProps,
-    {addMessage, updateMessageText})(withRedirect(Dialogs));
-
-export default DialogsContainer;
+export default compose(withRedirect,
+    connect(mapStateToProps, {addMessage, updateMessageText}))(Dialogs);
