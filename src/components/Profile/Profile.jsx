@@ -17,7 +17,10 @@ const Profile = (props) => {
 
             <ProfileHeader />
 
-            <ProfileInfo profile={props.profile}/>
+            <ProfileInfo profile={props.profile}
+                         status={props.status}
+                         setStatus={props.setStatus}
+                         changeStatusTC={props.changeStatusTC}/>
 
             <MyPostsContainer />
 
