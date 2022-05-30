@@ -11,6 +11,12 @@ class ProfileStatus extends React.Component {
         this.setState({status: text})
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (prevProps.status !== this.props.status) {
+            this.setState({status: this.props.status})
+        }
+    }
+
     render() {
         return (
             <div className={s.profile__status}>
