@@ -45,6 +45,17 @@ export const meTC = () => {
             })
     }
 }
+export const loginTC = (email, password) => {
+    return (dispatch) => {
+        dispatch(toggleFetching(true));
+        authAPI.login(email, password)
+            .then(data => {
+                if (data.resultCode !== 0) {
+                    console.warn('Something went wrong...')
+                }
+            })
+    }
+}
 
 
 export default authReducer;

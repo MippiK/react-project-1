@@ -1,6 +1,6 @@
 import React from "react";
 import {Field, reduxForm} from "redux-form";
-import {authAPI} from "../../api/api";
+import {loginTC} from "../../redux/authReducer";
 
 const LoginForm = (props) => {
     return (
@@ -27,12 +27,7 @@ const Login = (props) => {
 
     const onSubmit = (formData) => {
         console.log(formData)
-        authAPI.login(formData.email, formData.password)
-            .then(data => {
-                if (data.resultCode !== 0) {
-                    console.warn('Something went wrong...')
-                }
-            })
+        loginTC(formData.email, formData.password)
     }
 
     return (
