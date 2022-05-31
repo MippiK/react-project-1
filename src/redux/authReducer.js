@@ -1,12 +1,15 @@
 import {authAPI} from "../api/api";
 
+
 const SET_AUTH_USER = 'SET_AUTH_USER';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
+const SET_LOGIN_USER = 'SET_LOGIN_USER'
 
 let initial_state = {
     userId: null,
     email: null,
     login: null,
+    password: null,
     isAuth: false,
     isFetching: false
 }
@@ -24,6 +27,12 @@ const authReducer = (state=initial_state, action) => {
                 ...state,
                 isFetching: action.isFetching
             }
+        case SET_LOGIN_USER:
+            return {
+                ...state,
+                email: action.email,
+                password: action.password
+            }
         default: {
             return state
         }
@@ -32,6 +41,7 @@ const authReducer = (state=initial_state, action) => {
 
 export const setAuthUser = (userId, email, login) => ({type: SET_AUTH_USER, data: {userId, email, login}})
 export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
+export const setLoginUser = (email, password) => ({type: TOGGLE_FETCHING, email, password})
 export const meTC = () => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
@@ -51,8 +61,10 @@ export const loginTC = (email, password) => {
         authAPI.login(email, password)
             .then(data => {
                 if (data.resultCode !== 0) {
-                    console.warn('Something went wrong...')
+                    alert('Something went wrong...')
                 }
+                dispatch(setLoginUser(email, password));
+                dispatch(meTC())
             })
     }
 }

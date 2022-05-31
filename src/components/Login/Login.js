@@ -1,42 +1,56 @@
 import React from "react";
-import {Field, reduxForm} from "redux-form";
 import {loginTC} from "../../redux/authReducer";
+import {connect} from "react-redux";
+import { Formik, Field, Form, ErrorMessage } from 'formik';
+import * as Yup from 'yup';
 
 const LoginForm = (props) => {
     return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={'Email'} name={'email'} component={'input'}/>
-            </div>
-            <div>
-                <Field placeholder={'Password'} name={'password'} component={'input'}/>
-            </div>
-            <div>
-                <Field type={'checkbox'} name={'remebmerMe'} component={'input'}/> remember me
-            </div>
-            <div>
-                <button>Log in</button>
-            </div>
-        </form>
-    )
-}
-
-const LoginReduxForm = reduxForm({form: 'login'})(LoginForm)
-
-const Login = (props) => {
-
-    const onSubmit = (formData) => {
-        console.log(formData)
-        loginTC(formData.email, formData.password)
-    }
-
-    return (
         <>
             <h1>Login</h1>
-            <LoginReduxForm onSubmit={onSubmit}/>
+            <Formik
+                initialValues={{ email: '', password: ''}}
+                validationSchema={Yup.object({
+                    email: Yup.string()
+                        .max(40, 'Must be 40 characters or less')
+                        .required('Required'),
+                    password: Yup.string()
+                        .max(20, 'Must be 20 characters or less')
+                        .required('Required'),
+                })}
+                onSubmit={(values, { resetForm }) => {
+                    console.log(values)
+                    if (!props.isAuth) {
+                        props.loginTC(values.email, values.password)
+                        resetForm({values: ''})
+                    }
+                }}>
+                <Form>
+                    <div>
+                        <label htmlFor="email">Email</label>
+                        <Field name="email" type="text" />
+                        <ErrorMessage name="email" />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password</label>
+                        <Field name="password" type="text" />
+                        <ErrorMessage name="password" />
+                    </div>
+                    <button type="submit">Submit</button>
+                </Form>
+            </Formik>
         </>
 
-    )
+    );
+};
+
+
+const mapStateToProps = (state) => {
+    return {
+        isAuth: state.auth.isAuth
+    }
 }
 
-export default Login;
+
+
+export default connect(mapStateToProps, {loginTC})(LoginForm);

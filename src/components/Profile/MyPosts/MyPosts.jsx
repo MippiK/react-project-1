@@ -7,8 +7,6 @@ const MyPosts = (props) => {
     return (
         <div>
             <PostAddForm addPost={props.addPost}
-                         updatePostText={props.updatePostText}
-                         newPostText={props.newPostText}
             />
 
             <GetPosts posts={props.posts} />

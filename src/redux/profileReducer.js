@@ -1,7 +1,6 @@
 import {profileAPI} from "../api/api";
 
 const ADD_POST = 'ADD-POST';
-const UPDATE_POST_TEXT = 'UPDATE-POST-TEXT';
 const SET_PROFILE = 'SET-PROFILE'
 const SET_STATUS = 'SET_STATUS'
 
@@ -10,7 +9,6 @@ let initialState = {
         {id: 1, message: 'Hi, how are u?', like_count: 5},
         {id: 2, message: 'It\'s my first post', like_count: 3},
     ],
-    newPostText: '',
     profile: null,
     status: ''
 };
@@ -19,17 +17,11 @@ const profileReducer = (state = initialState, action) => {
     // to work with data, first u need to copy it
     switch (action.type) {
         case ADD_POST:
-            let messageText = state.newPostText;
+            let messageText = action.postText;
             return  {
                 ...state,
                 posts: [...state.posts,  {id: 2, message: messageText, like_count: 0}],
-                newPostText: ''
             };
-        case UPDATE_POST_TEXT:
-            return  {
-                ...state,
-                newPostText: action.text
-            }
         case SET_PROFILE:
             return {
                 ...state,
@@ -75,13 +67,11 @@ export const getStatusTC = (userId) => {
     }
 }
 
-export const addPost = () => ({
-    type: ADD_POST
+export const addPost = (postText) => ({
+    type: ADD_POST,
+    postText
 });
-export const updatePostText = (text) => ({
-    type: UPDATE_POST_TEXT,
-    text: text
-});
+
 
 export const setProfileTC = (userId) => {
     return (dispatch) => {

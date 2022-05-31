@@ -1,19 +1,30 @@
 import React from "react";
 import paf from './PostAddForm.module.css'
+import {Field, Form, Formik} from "formik";
+import * as Yup from "yup";
 
 const PostAddForm = (props) => {
-    /*let inputRef = React.createRef();*/
-
-    let onChangeText = (e) => {
-        /*let text = inputRef.current.value;*/
-        let text = e.target.value;
-        props.updatePostText(text)
-    }
 
     return (
             <div className={paf.profile_upload_news}>
-                <input placeholder='your news' type='text' value={props.newPostText} onChange={onChangeText}/>
-                <button onClick={props.addPost}>Send</button>
+                <Formik
+                    initialValues={{ postText: ''}}
+                    validationSchema={Yup.object({
+                        postText: Yup.string()
+                            .max(200, 'Must be 200 characters or less')
+                    })}
+                    onSubmit={(values, { resetForm }) => {
+                        console.log(values)
+                        props.addPost(values.postText)
+                        resetForm({values: ''})
+                    }}>
+                    <Form>
+                        <div>
+                            <Field placeholder='news' name="postText" type="text" />
+                            <button type="submit">Submit</button>
+                        </div>
+                    </Form>
+                </Formik>
             </div>
     );
 }
