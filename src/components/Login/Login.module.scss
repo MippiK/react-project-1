@@ -1,0 +1,15 @@
+.login {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 15px 0;
+  background-color: #0099ff;
+  border-radius: 10px;
+  padding: 10px;
+  max-width: 500px;
+  margin: 0 auto;
+  h1 {
+    font-size: 30px;
+  }
+}

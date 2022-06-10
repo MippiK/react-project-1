@@ -3,6 +3,7 @@ import {Navigate} from "react-router-dom";
 import {loginTC} from "../../redux/authReducer";
 import {connect} from "react-redux";
 import LoginForm from "../assets/Forms/LoginForm/LoginForm";
+import s from './Login.module.css'
 
 
 const Login = (props) => {
@@ -10,10 +11,10 @@ const Login = (props) => {
         return <Navigate to={'/profile'} />
     }
     return (
-        <>
+        <div className={s.login}>
             <h1>Login</h1>
             <LoginForm isAuth={props.isAuth} loginTC={props.loginTC}/>
-        </>
+        </div>
 
     );
 };

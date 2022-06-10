@@ -3,6 +3,7 @@
   display: flex;
   font-size: 20px;
   color: #e6f2ff;
+  align-items: center;
 }
 .form__input input {
   width: 100%;

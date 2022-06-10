@@ -1,3 +1,18 @@
-
+.login__form {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+}
+.login__form input {
+  margin-left: 10px;
+}
+.login__form input[type=checkbox] {
+  max-width: 20px;
+}
+.login__form button {
+  align-self: flex-end;
+}
 
 /*# sourceMappingURL=LoginForm.module.css.map */

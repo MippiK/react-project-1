@@ -1,0 +1,16 @@
+.login__form {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px 0;
+  input {
+    margin-left: 10px;
+  }
+  input[type=checkbox] {
+    max-width: 20px;
+  }
+  button {
+    align-self: flex-end;
+  }
+}
