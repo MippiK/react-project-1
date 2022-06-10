@@ -21,10 +21,13 @@ class ProfileStatus extends React.Component {
         return (
             <div className={s.profile__status}>
                 {this.state.isStatus ? <input type="text" value={this.state.status}
-                                              onBlur={this.onSetStatus}
+                                              onBlur={() => {
+                                                  this.props.changeStatusTC(this.state.status)
+                                                  this.onSetStatus()
+                                              }}
                                               autoFocus={true}
                                               onChange={e => this.onStatusChange(e.currentTarget.value)}
-                                              onDoubleClick={() => this.props.changeStatusTC(this.state.status)}/>
+                                              />
                     : <p onDoubleClick={this.onSetStatus}>{this.props.status}</p>}
             </div>
         )

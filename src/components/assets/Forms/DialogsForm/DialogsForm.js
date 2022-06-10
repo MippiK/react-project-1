@@ -1,6 +1,9 @@
 import {Field, Form, Formik} from "formik";
-import {dialogsValidatorSchema} from "../FormValidators/formValidators";
+import {dialogsValidatorSchema} from "../../FormValidators/formValidators";
 import React from "react";
+import sm from "./SendMessage.module.css";
+import FormInput from "../assets/FormInput/FormInput";
+import FormButton from "../assets/FormButton/FormButton";
 
 const DialogsForm = (props) => {
 
@@ -13,11 +16,9 @@ const DialogsForm = (props) => {
                     props.addMessage(values.messageText)
                     resetForm({values: ''})
                 }}>
-                <Form>
-                    <div>
-                        <Field placeholder='your message' name="messageText" type="text" />
-                        <button type="submit">Submit</button>
-                    </div>
+                <Form className={sm.container}>
+                    <FormInput placeholder='your message' name="messageText" type="text"/>
+                    <FormButton>Submit</FormButton>
                 </Form>
             </Formik>
     );

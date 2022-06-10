@@ -15,6 +15,13 @@
   font-size: 18px;
   color: #e6f2ff;
 }
+.header .user_info {
+  display: flex;
+}
+.header .user_info p {
+  padding-left: 5px;
+  cursor: pointer;
+}
 .header .user_info img {
   width: 50px;
   height: 50px;

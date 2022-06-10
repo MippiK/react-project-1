@@ -3,13 +3,11 @@ import {authAPI} from "../api/api";
 
 const SET_AUTH_USER = 'SET_AUTH_USER';
 const TOGGLE_FETCHING = 'TOGGLE_FETCHING';
-const SET_LOGIN_USER = 'SET_LOGIN_USER'
 
 let initial_state = {
     userId: null,
     email: null,
     login: null,
-    password: null,
     isAuth: false,
     isFetching: false
 }
@@ -20,18 +18,12 @@ const authReducer = (state=initial_state, action) => {
             return {
                 ...state,
                 ...action.data,
-                isAuth: true
+                isAuth: action.isAuth
             }
         case TOGGLE_FETCHING:
             return {
                 ...state,
                 isFetching: action.isFetching
-            }
-        case SET_LOGIN_USER:
-            return {
-                ...state,
-                email: action.email,
-                password: action.password
             }
         default: {
             return state
@@ -39,9 +31,8 @@ const authReducer = (state=initial_state, action) => {
     }
 }
 
-export const setAuthUser = (userId, email, login) => ({type: SET_AUTH_USER, data: {userId, email, login}})
+export const setAuthUser = (userId, email, login, isAuth) => ({type: SET_AUTH_USER, data: {userId, email, login}, isAuth})
 export const toggleFetching = (isFetching) => ({type: TOGGLE_FETCHING, isFetching})
-export const setLoginUser = (email, password) => ({type: TOGGLE_FETCHING, email, password})
 export const meTC = () => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
@@ -49,22 +40,33 @@ export const meTC = () => {
             .then(data => {
                 if (data.resultCode === 0) {
                     let {email, id, login} = data.data;
-                    dispatch(setAuthUser(id, email, login));
+                    dispatch(setAuthUser(id, email, login, true));
                     dispatch(toggleFetching(false));
                 }
             })
     }
 }
-export const loginTC = (email, password) => {
+export const loginTC = (email, password, rememberMe) => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
-        authAPI.login(email, password)
+        authAPI.login(email, password, rememberMe)
             .then(data => {
                 if (data.resultCode !== 0) {
                     alert('Something went wrong...')
                 }
-                dispatch(setLoginUser(email, password));
                 dispatch(meTC())
+            })
+    }
+}
+export const logoutTC = () => {
+    return (dispatch) => {
+        dispatch(toggleFetching(true));
+        authAPI.logout()
+            .then(data => {
+                if (data.resultCode !== 0) {
+                    alert('Something went wrong...')
+                }
+                dispatch(setAuthUser(null, null, null, false));
             })
     }
 }

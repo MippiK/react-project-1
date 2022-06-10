@@ -1,6 +1,9 @@
-import {Field, Form, Formik} from "formik";
-import {postsValidatorSchema} from "../FormValidators/formValidators";
+import {Form, Formik} from "formik";
+import {postsValidatorSchema} from "../../FormValidators/formValidators";
 import React from "react";
+import FormInput from "../assets/FormInput/FormInput";
+import FormButton from "../assets/FormButton/FormButton";
+import paf from './PostAddForm.module.css'
 
 const PostForm = (props) => {
     return (
@@ -12,11 +15,9 @@ const PostForm = (props) => {
                     props.addPost(values.postText)
                     resetForm({values: ''})
                 }}>
-                <Form>
-                    <div>
-                        <Field placeholder='news' name="postText" type="text" />
-                        <button type="submit">Submit</button>
-                    </div>
+                <Form className={paf.profile_upload_news}>
+                    <FormInput placeholder='news' name="postText" type="text"/>
+                    <FormButton>Submit</FormButton>
                 </Form>
             </Formik>
     );

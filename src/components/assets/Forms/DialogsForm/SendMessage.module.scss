@@ -4,13 +4,8 @@
   justify-content: space-between;
   align-items: center;
   input {
-    padding: 0 5px;
-    width: 440px;
-    min-height: 50px;
-    background-color: #e6f1ff;
-    color: black;
-    vertical-align: top;
-    font-size: 14px;
+    max-width: 440px;
+    margin-bottom: 0;
   }
   button {
     height: 50px;
