@@ -46,15 +46,26 @@ export const meTC = () => {
             })
     }
 }
-export const loginTC = (email, password, rememberMe) => {
+export const loginTC = (email, password, rememberMe, setStatus) => {
     return (dispatch) => {
         dispatch(toggleFetching(true));
         authAPI.login(email, password, rememberMe)
             .then(data => {
-                if (data.resultCode !== 0) {
-                    alert('Something went wrong...')
+                switch (data.resultCode) {
+                    case 0: {
+                        dispatch(meTC())
+                        break
+                    }
+                    case 1: {
+                        if (data.messages.length !== 0) {
+                            dispatch(setStatus(data.messages))
+                        }
+                        break
+                    }
+                    default: {
+                        throw Error('User was not authorized')
+                    }
                 }
-                dispatch(meTC())
             })
     }
 }

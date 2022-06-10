@@ -5,6 +5,9 @@
   flex-direction: column;
   gap: 10px 0;
 }
+.login__form p {
+  color: red;
+}
 .login__form input {
   margin-left: 10px;
 }

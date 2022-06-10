@@ -11,19 +11,22 @@ const LoginForm = (props) => {
             <Formik
                 initialValues={{ email: '', password: '', rememberMe: false}}
                 validationSchema={loginValidatorSchema}
-                onSubmit={(values, { resetForm }) => {
+                onSubmit={(values, { resetForm, setStatus}) => {
                     console.log(values)
                     if (!props.isAuth) {
-                        props.loginTC(values.email, values.password, values.rememberMe)
+                        props.loginTC(values.email, values.password, values.rememberMe, setStatus)
                         resetForm({values: ''})
                     }
                 }}>
-                <Form className={s.login__form}>
-                    <FormInput htmlFor='email' name='email' type='text' placeholder='email'>Email</FormInput>
-                    <FormInput htmlFor='password' name='password' type='password' placeholder='password'>Password</FormInput>
-                    <FormInput htmlFor='rememberMe' name='rememberMe' type='checkbox'>Remember Me</FormInput>
-                    <FormButton>Login</FormButton>
-                </Form>
+                {({isSubmitting, status}) => (
+                    <Form className={s.login__form}>
+                        <p>{status}</p>
+                        <FormInput htmlFor='email' name='email' type='text' placeholder='email'>Email</FormInput>
+                        <FormInput htmlFor='password' name='password' type='password' placeholder='password'>Password</FormInput>
+                        <FormInput htmlFor='rememberMe' name='rememberMe' type='checkbox'>Remember Me</FormInput>
+                        <FormButton disabled={isSubmitting}>Login</FormButton>
+                    </Form>
+                )}
             </Formik>
     );
 };
